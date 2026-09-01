@@ -58,20 +58,59 @@ footer{padding:40px 0 44px}
 .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:24px}
 .foot a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:20px}
 .disc{margin-top:20px;font-size:12px;color:var(--muted);max-width:74ch}
-@media(max-width:900px){.menu{display:none}.about-grid{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}
- .bio{grid-template-columns:1fr}.bio img{max-width:210px}.sec-head{grid-template-columns:1fr}}
-@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.dots{display:none}
+
+@media(max-width:900px){.menu{display:none}.about-grid{grid-template-columns:1fr}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .bio{grid-template-columns:1fr}.bio img{max-width:210px}
+ .sec-head{grid-template-columns:1fr;gap:16px}.sec-head .btn{justify-self:start}}
+
+/* Телефон: девять карточек в столбик — это полтора экрана прокрутки.
+   Превращаем их в ленту со свайпом и прилипанием. */
+@media(max-width:760px){
+ .grid{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;
+   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+   scrollbar-width:none;
+   /* лента идёт от края до края экрана, а не внутри полей */
+   margin-inline:calc(-1*clamp(20px,5vw,56px));
+   padding-inline:clamp(20px,5vw,56px);padding-block:4px 10px;
+   scroll-padding-left:clamp(20px,5vw,56px)}
+ .grid::-webkit-scrollbar{display:none}
+ .card{flex:0 0 min(70%,270px);scroll-snap-align:start;scroll-snap-stop:always;
+   padding:22px 20px 24px;min-height:132px;display:flex;flex-direction:column;justify-content:flex-end}
+ .card:last-child{margin-right:clamp(20px,5vw,56px)}
+ .card h3{font-size:21px}
+ .dots{display:flex;gap:7px;margin-top:16px;align-items:center}
+ .dots i{width:6px;height:6px;border-radius:50%;background:rgba(20,32,31,.16);transition:.28s ease;flex:none}
+ .dots i.on{width:20px;border-radius:3px;background:var(--teal)}
+}
+
+/* Телефон: первый экран без пустот, заголовок в полную ширину */
+@media(max-width:760px){
+ .hero{min-height:auto}
+ .hero h1{font-size:clamp(40px,11.6vw,58px);line-height:1.01;letter-spacing:-.04em}
+ .lead{font-size:17px;line-height:1.55;margin:16px 0 26px;max-width:33ch}
+ .tag{font-size:12px;padding:6px 13px;margin-bottom:18px}
+ .actions{gap:10px}
+ .actions .btn{flex:1 1 0;min-width:0;justify-content:space-between;padding:14px 14px 14px 20px}
+ .sec{padding:clamp(44px,7vh,72px) 0}
+ h2{font-size:clamp(25px,7vw,32px)}
+ .about-lead{font-size:clamp(23px,6.6vw,30px)}
+ .cta h2{font-size:clamp(23px,6.2vw,30px)}
+ .foot{flex-direction:column;align-items:flex-start;gap:16px}
+ .foot a{margin:0 20px 0 0}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 
-body{overflow-x:hidden}
-.hero{position:relative;min-height:88svh;display:flex;align-items:center}
+html,body{overflow-x:clip}
+.hero{position:relative;min-height:88svh;display:flex;align-items:center;overflow:hidden}
 /* Сцена живёт прямо в фоне страницы: холст прозрачный, рамок и вырезов нет.
    Рендерим крупный холст и ужимаем его трансформом — так объект целиком
-   помещается в экран и не обрезается краем. */
+   помещается в кадр и не обрезается краем. */
 #scene{position:absolute;top:-230px;right:-130px;width:2400px;height:3400px;z-index:0;
   pointer-events:none;transform:scale(.235);transform-origin:top right;
-  filter:saturate(.7) brightness(1.05);opacity:.46}
+  filter:saturate(.85) brightness(1.03);opacity:.62}
 #scene canvas{width:100%;height:100%;display:block}
 .hero-inner{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(38px,5.6vw,74px);font-weight:700;line-height:1.04;letter-spacing:-.035em}
@@ -80,8 +119,12 @@ body{overflow-x:hidden}
 .tag{display:inline-flex;gap:9px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.66);
  padding:7px 15px;border-radius:999px;font-size:13px;color:var(--muted);margin-bottom:22px}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:1100px){#scene{transform:scale(.2);top:-280px;right:-190px;opacity:.38}}
-@media(max-width:900px){#scene{transform:scale(.17);top:-240px;right:-300px;opacity:.28}}
+@media(max-width:1100px){#scene{transform:scale(.2);top:-190px;right:-170px;opacity:.55}}
+@media(max-width:760px){
+ .hero{display:block;padding-bottom:clamp(30px,6vh,54px);overflow:hidden}
+ #scene{top:-1150px;right:50%;transform:translateX(50%) scale(.16);transform-origin:top center;opacity:.7}
+ .hero-inner{padding-top:290px}
+}
 </style></head><body>
 <div class="wrap">  <nav class="nav">
     <div class="brand"><span class="mark">N</span>
@@ -134,6 +177,7 @@ body{overflow-x:hidden}
       <div class="card"><span class="n">08</span><h3>Biotech</h3></div>
       <div class="card"><span class="n">09</span><h3>Medical isotopes</h3></div>
     </div>
+    <div class="dots" id="dots"></div>
   </section>
 
   <section class="sec" id="team">
@@ -167,6 +211,28 @@ body{overflow-x:hidden}
     </div>
     <p class="disc">Nothing on this website constitutes an offer to sell or the solicitation of an offer to buy securities.</p>
   </footer>
+
+<script>
+// Точки под лентой секторов: показывают, где ты в свайпе. Работают только там,
+// где лента реально горизонтальная (телефон) — на сетке .dots скрыт стилями.
+(function(){
+  const row=document.querySelector('#sectors .grid'), box=document.getElementById('dots');
+  if(!row||!box) return;
+  const cards=[...row.children];
+  cards.forEach(()=>box.appendChild(document.createElement('i')));
+  const dots=[...box.children];
+  let raf=0;
+  function mark(){
+    raf=0;
+    const x=row.scrollLeft+row.clientWidth*0.25;
+    let best=0,bd=1e9;
+    cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft-row.scrollLeft); if(d<bd){bd=d;best=i;}});
+    dots.forEach((d,i)=>d.classList.toggle('on',i===best));
+  }
+  row.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(mark)},{passive:true});
+  mark();
+})();
+</script>
 </div>
 <script type="module">
 import { Application } from 'https://unpkg.com/@splinetool/runtime/build/runtime.js';
