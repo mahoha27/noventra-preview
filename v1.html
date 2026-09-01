@@ -63,11 +63,15 @@ footer{padding:40px 0 44px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 
+body{overflow-x:hidden}
 .hero{position:relative;min-height:88svh;display:flex;align-items:center}
-#spline{position:absolute;top:0;right:0;width:64%;height:100%;z-index:0;pointer-events:none;
-  filter:hue-rotate(158deg) saturate(.5) brightness(1.1) contrast(.85);opacity:.62;
-  -webkit-mask-image:linear-gradient(100deg,transparent 0%,rgba(0,0,0,.4) 26%,#000 62%);
-  mask-image:linear-gradient(100deg,transparent 0%,rgba(0,0,0,.4) 26%,#000 62%)}
+/* Сцена живёт прямо в фоне страницы: холст прозрачный, рамок и вырезов нет.
+   Рендерим крупный холст и ужимаем его трансформом — так объект целиком
+   помещается в экран и не обрезается краем. */
+#scene{position:absolute;top:-380px;right:10px;width:2400px;height:3400px;z-index:0;
+  pointer-events:none;transform:scale(.33);transform-origin:top right;
+  filter:saturate(.72) brightness(1.04);opacity:.5}
+#scene canvas{width:100%;height:100%;display:block}
 .hero-inner{position:relative;z-index:2;width:100%}
 .hero h1{font-size:clamp(38px,5.6vw,74px);font-weight:700;line-height:1.04;letter-spacing:-.035em}
 .hero h1 em{font-style:normal;color:var(--teal-2)}
@@ -75,7 +79,8 @@ footer{padding:40px 0 44px}
 .tag{display:inline-flex;gap:9px;align-items:center;border:1px solid var(--line);background:rgba(255,255,255,.66);
  padding:7px 15px;border-radius:999px;font-size:13px;color:var(--muted);margin-bottom:22px}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:900px){#spline{width:100%;opacity:.34;-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 60%);mask-image:linear-gradient(180deg,transparent 0%,#000 60%)}}
+@media(max-width:1100px){#scene{transform:scale(.26);top:-300px;right:-140px;opacity:.4}}
+@media(max-width:900px){#scene{transform:scale(.2);top:-260px;right:-320px;opacity:.3}}
 </style></head><body>
 <div class="wrap">  <nav class="nav">
     <div class="brand"><span class="mark">N</span>
@@ -84,7 +89,7 @@ footer{padding:40px 0 44px}
     <a class="btn" href="#contact">Get in touch <i>&rarr;</i></a>
   </nav>
   <header class="hero" id="top">
-    <canvas id="spline"></canvas>
+    <div id="scene"><canvas></canvas></div>
     <div class="hero-inner">
       <div class="tag">&#9670; Advanced technology investors</div>
       <h1>Built quietly.<br><em>Valued loudly.</em></h1>
@@ -164,12 +169,17 @@ footer{padding:40px 0 44px}
 </div>
 <script type="module">
 import { Application } from 'https://unpkg.com/@splinetool/runtime/build/runtime.js';
-const c=document.getElementById('spline');
+const c=document.querySelector('#scene canvas');
 if(c){const app=new Application(c);
  app.load('https://prod.spline.design/2AaH37t81qKHssNs/scene.splinecode').then(()=>{
-   ['Text','Text 2'].forEach(n=>{const o=app.findObjectByName(n); if(o)o.visible=false;});
-   // спокойное вращение по кругу, без реакции на курсор
-   const t=app.findObjectByName('Shape')||app.findObjectByName('Path');
-   if(t){let a=0; setInterval(()=>{a+=0.0016; t.rotation.z=a;},32);}
+   // убираем всё лишнее из чужой сцены: подписи, вторую фигуру и её тёмный фон —
+   // остаётся один объект на прозрачном холсте, поверх кремового фона сайта
+   ['Text','Text 2','Background Circle','Shape 2'].forEach(n=>{
+     const o=app.findObjectByName(n); if(o)o.visible=false;});
+   app.setBackgroundColor('rgba(0,0,0,0)');
+   // спокойное вращение по кругу; курсор сцену не трогает (pointer-events:none)
+   const t=app.findObjectByName('Shape');
+   if(t){let a=t.rotation.z||0;
+     setInterval(()=>{a+=0.0016; t.rotation.z=a;},33);}
  }).catch(()=>{});}
 </script></body></html>
