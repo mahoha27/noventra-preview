@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
+html,body{background:var(--cream)}
 :root{
   --cream:#FBF8F3;
   --cream-2:#F5F0E8;
@@ -36,16 +37,15 @@ body::before{
     radial-gradient(52% 40% at 6% 46%, rgba(42,101,111,.10), transparent 64%),
     radial-gradient(60% 40% at 70% 96%, rgba(227,154,52,.10), transparent 66%);
 }
-.hero-full{position:relative;min-height:92svh;display:flex;align-items:center}
-.bg-base{position:fixed;inset:0;z-index:-3;background:var(--cream)}
-#spline{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:-2;
+.hero-full{position:relative;min-height:92svh;display:flex;align-items:center;overflow:hidden;background:var(--cream)}
+.bg-base{position:absolute;inset:0;z-index:0;background:var(--cream)}
+#spline{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;
   filter:hue-rotate(158deg) saturate(.62) brightness(1.06) contrast(.9);opacity:1}
-.scrim{position:fixed;inset:0;pointer-events:none;
-  position:fixed;z-index:-1;background:linear-gradient(95deg,rgba(251,248,243,.94) 0%,rgba(251,248,243,.88) 28%,rgba(251,248,243,.62) 46%,rgba(251,248,243,.3) 64%,rgba(251,248,243,.16) 100%)}
-.hero-inner{position:relative;z-index:2;width:100%}
+.scrim{position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(95deg,rgba(251,248,243,.94) 0%,rgba(251,248,243,.88) 28%,rgba(251,248,243,.62) 46%,rgba(251,248,243,.3) 64%,rgba(251,248,243,.16) 100%)}
+.hero-inner{position:relative;z-index:3;width:100%}
 .hero-full h1{font-size:clamp(40px,6vw,82px);font-weight:700;line-height:1.03;letter-spacing:-.035em}
 .hero-full .lead{margin:22px 0 32px;max-width:44ch;font-size:clamp(16px,1.3vw,19px);color:var(--muted)}
-.scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;text-decoration:none;
+.scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:4;text-decoration:none;
   width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);
   display:grid;place-items:center;color:var(--teal);backdrop-filter:blur(6px);animation:bob 2.4s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
@@ -188,7 +188,7 @@ footer{padding:46px 0 40px}
 a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 </style>
 </head>
-<body style="background:transparent">
+<body>
 <div class="wrap">
 
   <nav class="nav">
