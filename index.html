@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
+html{background:var(--cream)}
 :root{
   --cream:#FBF8F3;
   --cream-2:#F5F0E8;
@@ -24,7 +25,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  background:var(--cream);color:var(--ink);
+  background:transparent;color:var(--ink);
   font-family:"Open Sans",system-ui,sans-serif;line-height:1.65;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
@@ -36,21 +37,19 @@ body::before{
     radial-gradient(52% 40% at 6% 46%, rgba(42,101,111,.10), transparent 64%),
     radial-gradient(60% 40% at 70% 96%, rgba(227,154,52,.10), transparent 66%);
 }
-.hero-full{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-#spline{position:absolute;inset:0;width:100%;height:100%;display:block;
-  filter:hue-rotate(158deg) saturate(.5) brightness(1.22) contrast(.86)}
-.scrim{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(100deg,rgba(251,248,243,.62) 0%,rgba(251,248,243,.42) 34%,rgba(251,248,243,.14) 60%,rgba(251,248,243,0) 82%)}
+.hero-full{position:relative;min-height:92svh;display:flex;align-items:center}
+#spline{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:-2;
+  filter:hue-rotate(158deg) saturate(.42) brightness(1.5) contrast(.7);opacity:.5}
+.scrim{position:fixed;inset:0;pointer-events:none;
+  position:fixed;z-index:-1;background:rgba(251,248,243,.72)}
 .hero-inner{position:relative;z-index:2;width:100%}
-.hero-full h1{font-size:clamp(40px,6vw,82px);font-weight:700;line-height:1.03;letter-spacing:-.035em;
-  text-shadow:0 2px 22px rgba(251,248,243,.9),0 1px 3px rgba(251,248,243,.9)}
-.hero-full .lead{margin:22px 0 32px;max-width:44ch;font-size:clamp(16px,1.3vw,19px);color:#4A5A5C;
-  text-shadow:0 1px 16px rgba(251,248,243,.95)}
+.hero-full h1{font-size:clamp(40px,6vw,82px);font-weight:700;line-height:1.03;letter-spacing:-.035em}
+.hero-full .lead{margin:22px 0 32px;max-width:44ch;font-size:clamp(16px,1.3vw,19px);color:var(--muted)}
 .scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;text-decoration:none;
   width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.7);
   display:grid;place-items:center;color:var(--teal);backdrop-filter:blur(6px);animation:bob 2.4s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-@media(max-width:760px){.scrim{background:linear-gradient(180deg,rgba(251,248,243,.72) 0%,rgba(251,248,243,.4) 52%,rgba(251,248,243,.08) 100%)}}
+
 .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
 h1,h2,h3,.brand{font-family:"Ubuntu",sans-serif}
@@ -189,7 +188,7 @@ footer{padding:46px 0 40px}
 a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 </style>
 </head>
-<body>
+<body style="background:transparent">
 <div class="wrap">
 
   <nav class="nav">
