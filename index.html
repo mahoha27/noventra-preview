@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-html{background:var(--cream)}
 :root{
   --cream:#FBF8F3;
   --cream-2:#F5F0E8;
@@ -38,6 +37,7 @@ body::before{
     radial-gradient(60% 40% at 70% 96%, rgba(227,154,52,.10), transparent 66%);
 }
 .hero-full{position:relative;min-height:92svh;display:flex;align-items:center}
+.bg-base{position:fixed;inset:0;z-index:-3;background:var(--cream)}
 #spline{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:-2;
   filter:hue-rotate(158deg) saturate(.62) brightness(1.06) contrast(.9);opacity:1}
 .scrim{position:fixed;inset:0;pointer-events:none;
@@ -205,6 +205,7 @@ a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
   </div>
 
   <header class="hero-full">
+    <div class="bg-base"></div>
     <canvas id="spline"></canvas>
     <div class="scrim"></div>
     <div class="wrap hero-inner">
