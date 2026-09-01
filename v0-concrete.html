@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noventra</title>
+<meta name="description" content="We invest in advanced technology and the companies that will define what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;450&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#D9D7D1;      /* фон: бетон / алюминий */
+  --concrete-2:#CFCCC5;
+  --graphite:#14161A;      /* основной текст */
+  --steel:#5E6268;         /* вторичный */
+  --cherenkov:#2F6FE4;     /* свечение реактора — единственный яркий */
+  --copper:#A8703F;        /* critical metals — только волосяные линии */
+  --measure:62ch;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--concrete);
+  color:var(--graphite);
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
+.rule{height:1px;background:var(--copper);opacity:.28}
+
+/* nav */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0 0}
+.brand{font-family:"Archivo",sans-serif;font-weight:900;font-size:15px;letter-spacing:.22em}
+.nav ul{display:flex;gap:30px;list-style:none}
+.nav a{color:var(--steel);text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.nav a:hover,.nav a:focus-visible{color:var(--graphite)}
+
+/* hero — типографика играет фразу */
+.hero{padding:clamp(70px,13vh,130px) 0 clamp(56px,9vh,96px)}
+.quiet{font-family:"IBM Plex Mono",monospace;font-size:clamp(13px,1.5vw,16px);letter-spacing:.24em;text-transform:uppercase;color:var(--steel);margin-bottom:clamp(14px,2.4vw,26px)}
+.loud{position:relative;font-family:"Archivo",sans-serif;font-weight:900;font-size:clamp(52px,13.2vw,196px);line-height:.86;letter-spacing:-.035em;color:var(--graphite)}
+.loud::after{
+  content:"";position:absolute;left:-4%;right:6%;top:12%;bottom:6%;
+  background:radial-gradient(60% 70% at 42% 50%,rgba(47,111,228,.30),rgba(47,111,228,0) 72%);
+  filter:blur(30px);z-index:-1;pointer-events:none;
+}
+.hero-sub{margin-top:clamp(26px,4vw,44px);max-width:var(--measure);font-size:clamp(16px,1.35vw,19px);color:var(--steel)}
+
+/* абзац */
+.about{padding:clamp(56px,9vh,104px) 0}
+.about p{max-width:var(--measure);font-size:clamp(17px,1.5vw,21px);line-height:1.62}
+.about strong{font-weight:450;color:var(--graphite);border-bottom:1px solid var(--cherenkov);padding-bottom:1px}
+
+/* секторы — опись материалов, не карточки */
+.sectors{padding:clamp(48px,8vh,88px) 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:26px;border-top:1px solid rgba(20,22,26,.16)}
+.cell{padding:22px 8px 20px 0;border-bottom:1px solid rgba(20,22,26,.16);font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(16px,1.7vw,23px);letter-spacing:-.01em}
+.cell span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;color:var(--copper);margin-bottom:7px}
+
+/* цитата */
+.voice{padding:clamp(56px,9vh,104px) 0;display:grid;grid-template-columns:min(240px,26vw) 1fr;gap:clamp(26px,5vw,64px);align-items:start}
+.portrait{aspect-ratio:4/5;background:var(--concrete-2);border:1px solid rgba(20,22,26,.14);display:flex;align-items:center;justify-content:center}
+.portrait .mono{text-align:center;line-height:1.7}
+.bio h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,44px);line-height:1.1;letter-spacing:-.028em;margin:12px 0 6px}
+.bio .role{color:var(--copper);margin-bottom:20px}
+.bio p{max-width:52ch;font-size:clamp(15px,1.25vw,18px);line-height:1.62;color:var(--steel)}
+.bio p+p{margin-top:14px}
+
+/* контакт */
+.contact{padding:clamp(64px,11vh,124px) 0 clamp(48px,8vh,88px)}
+.contact h2{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(24px,3.6vw,46px);line-height:1.18;letter-spacing:-.025em;max-width:17ch}
+.cta{display:inline-block;margin-top:30px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--cherenkov);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:4px;transition:opacity .2s}
+.cta:hover,.cta:focus-visible{opacity:.62}
+
+/* подвал */
+footer{padding:34px 0 46px}
+.foot-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:26px}
+.foot-links{display:flex;gap:24px}
+.foot-links a{color:var(--steel);text-decoration:none;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.foot-links a:hover{color:var(--graphite)}
+.disclaimer{margin-top:30px;max-width:74ch;font-size:12px;line-height:1.6;color:var(--steel)}
+
+@media(max-width:760px){
+  .nav ul{gap:18px}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .voice{grid-template-columns:1fr;gap:28px}
+  .portrait{max-width:190px}
+}
+@media(max-width:420px){ .grid{grid-template-columns:1fr} }
+
+/* появление: сначала тихо, потом громко */
+@media(prefers-reduced-motion:no-preference){
+  .quiet,.loud,.hero-sub{opacity:0;transform:translateY(12px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .quiet{animation-delay:.05s}
+  .loud{animation-delay:.30s;animation-duration:1s}
+  .hero-sub{animation-delay:.62s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+a:focus-visible{outline:2px solid var(--cherenkov);outline-offset:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="brand">NOVENTRA</div>
+    <ul>
+      <li><a href="#sectors">Sectors</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="quiet">Built quietly.</div>
+    <h1 class="loud">Valued<br>loudly.</h1>
+    <p class="hero-sub">We invest in advanced technology and the companies that will define what comes next.</p>
+  </header>
+
+  <div class="rule"></div>
+
+  <section class="about">
+    <p>Noventra backs founders building what comes next. We are <strong>stage-agnostic</strong>, investing in companies working at the edge of advanced technology and in the sectors that shape industrial and national capability for decades ahead. We look for teams who have already done the difficult part — built something real, gathered people around it, and put it in front of the world. Capital alone rarely decides an outcome. What decides it is who stands behind the company when the work gets hard. If you are building something ambitious and intend to see it through, we would like to hear from you.</p>
+  </section>
+
+  <section class="sectors" id="sectors">
+    <div class="mono">Where we look</div>
+    <div class="grid">
+      <div class="cell"><span>01</span>Nuclear</div>
+      <div class="cell"><span>02</span>Fusion</div>
+      <div class="cell"><span>03</span>Critical metals</div>
+      <div class="cell"><span>04</span>Defense</div>
+      <div class="cell"><span>05</span>AI robotics</div>
+      <div class="cell"><span>06</span>Space</div>
+      <div class="cell"><span>07</span>Quantum</div>
+      <div class="cell"><span>08</span>Biotech</div>
+      <div class="cell"><span>09</span>Medical isotopes</div>
+    </div>
+  </section>
+
+  <section class="voice">
+    <div class="portrait"><div class="mono">Portrait<br>to come</div></div>
+    <div class="bio">
+      <div class="mono">Who we are</div>
+      <h2>Art Balikin</h2>
+      <div class="role mono">Partner</div>
+      <p>Art works at the point where private companies meet public capital. He has guided founders through the transition most companies attempt once and few complete — from a business that works to a business the market can own.</p>
+      <p>His approach is unfashionably patient. He looks for teams that have already proven something difficult, and stays involved long after the terms are agreed.</p>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="contact" id="contact">
+    <h2>If you are building something ambitious, we would like to hear from you.</h2>
+    <a class="cta" href="mailto:contact@noventra.fund">Get in touch</a>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    <div class="foot-top">
+      <div class="brand">NOVENTRA</div>
+      <div class="foot-links">
+        <a href="#sectors">Sectors</a>
+        <a href="mailto:contact@noventra.fund">Contact</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+    <p class="disclaimer">Nothing on this website constitutes an offer to sell or the solicitation of an offer to buy securities.</p>
+  </footer>
+
+</div>
+</body>
+</html>
