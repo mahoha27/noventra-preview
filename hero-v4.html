@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Noventra — герой v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --cream:#FAF6EF; --teal:#134851; --teal-2:#1E6A75; --teal-3:#2E8C99;
+ --amber:#F0A02E; --amber-2:#FFC46B; --cyan:#4FC3D9; --ink:#0F1C1E; --muted:#5F7274;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:"Open Sans",sans-serif;color:var(--ink);overflow-x:hidden}
+
+/* ══ ЖИВОЙ ФОН: текучие пятна ══ */
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:
+  linear-gradient(180deg,#FDFAF4 0%,#F6F1E7 52%,#EFE9DC 100%)}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.62;will-change:transform}
+.b1{width:56vw;height:56vw;background:radial-gradient(circle,#FFC46B,#F0A02E 42%,transparent 70%);top:-18%;right:-10%;animation:m1 22s ease-in-out infinite}
+.b2{width:48vw;height:48vw;background:radial-gradient(circle,#4FC3D9,#1E6A75 46%,transparent 72%);bottom:-22%;left:-12%;animation:m2 26s ease-in-out infinite}
+.b3{width:38vw;height:38vw;background:radial-gradient(circle,#8FE0C8,transparent 68%);top:32%;left:38%;opacity:.4;animation:m3 30s ease-in-out infinite}
+@keyframes m1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-8vw,7vh) scale(1.14)}}
+@keyframes m2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10vw,-8vh) scale(1.1)}}
+@keyframes m3{0%,100%{transform:translate(0,0)}50%{transform:translate(-6vw,-5vh)}}
+/* зернистость — убирает «пластиковость» градиента */
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.hero{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(24px,4vw,56px);align-items:center;min-height:100vh;padding:80px 0}
+h1{font-family:"Ubuntu",sans-serif;font-size:clamp(38px,5.2vw,66px);font-weight:700;line-height:1.04;letter-spacing:-.035em}
+h1 em{font-style:normal;color:var(--teal-2)}
+.sub{color:var(--muted);margin:20px 0 30px;max-width:44ch;font-size:17px}
+.tag{display:inline-flex;gap:9px;align-items:center;border:1px solid rgba(19,72,81,.16);background:rgba(255,255,255,.62);
+ padding:7px 15px;border-radius:999px;font-size:13px;color:var(--teal);margin-bottom:22px;backdrop-filter:blur(6px)}
+.btn{font-family:"Ubuntu",sans-serif;display:inline-flex;align-items:center;gap:11px;background:var(--teal);color:#fff;
+ text-decoration:none;padding:13px 15px 13px 24px;border-radius:999px;font-weight:500;box-shadow:0 16px 34px -16px rgba(19,72,81,.6)}
+.btn i{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-style:normal;font-size:13px}
+
+/* ══ СЦЕНА ══ */
+.stage{position:relative;display:grid;place-items:center;min-height:min(62vw,520px);perspective:1250px}
+.rig{position:relative;width:min(100%,380px);aspect-ratio:1;transform-style:preserve-3d;
+  transform:rotateX(var(--rx,14deg)) rotateY(var(--ry,-30deg)) rotateZ(var(--rz,-4deg));
+  animation:drift 18s ease-in-out infinite;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes drift{0%,100%{transform:rotateX(14deg) rotateY(-30deg) rotateZ(-4deg) translateY(0)}
+                 50%{transform:rotateX(9deg) rotateY(-18deg) rotateZ(-2deg) translateY(-18px)}}
+
+.layer{position:absolute;inset:0;border-radius:36px;transform-style:preserve-3d;overflow:hidden;
+ border:1px solid rgba(255,255,255,.92);
+ background:linear-gradient(150deg,rgba(255,255,255,.86),rgba(206,234,236,.5) 48%,rgba(150,200,206,.4));
+ box-shadow:0 30px 70px -30px rgba(10,50,56,.5), inset 0 1px 0 rgba(255,255,255,.95);
+ opacity:0;animation:unfold .95s cubic-bezier(.16,.9,.3,1) forwards}
+.L1{--z:-190px;animation-delay:.05s}
+.L2{--z:-125px;animation-delay:.17s}
+.L3{--z:-62px;animation-delay:.29s;overflow:visible}
+.L4{--z:0px;animation-delay:.41s}
+@keyframes unfold{
+  from{opacity:0;transform:translateZ(0) scale(.86)}
+  to{opacity:var(--op,1);transform:translateZ(var(--z)) scale(var(--sc,1))}
+}
+.L1{--op:.32;--sc:.86} .L2{--op:.5;--sc:.91} .L3{--op:.72;--sc:.96} .L4{--op:1;--sc:1}
+
+/* содержимое слоёв — «уровни разбора» */
+.dots{position:absolute;inset:16px;border-radius:26px;
+ background-image:radial-gradient(rgba(19,72,81,.30) 1.1px,transparent 1.1px);background-size:19px 19px;opacity:.55}
+.net{position:absolute;inset:0}
+.net line{stroke:rgba(19,72,81,.34);stroke-width:1}
+.net circle{fill:var(--teal-3)}
+.chip{position:absolute;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+ background:rgba(255,255,255,.9);border:1px solid rgba(19,72,81,.16);color:var(--teal);
+ padding:5px 10px;border-radius:8px;box-shadow:0 6px 14px -8px rgba(10,50,56,.5)}
+.sheen{position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(116deg,transparent 33%,rgba(255,255,255,.85) 46%,transparent 58%);
+ transform:translateX(-125%);animation:sweep 7s ease-in-out infinite 1.4s}
+@keyframes sweep{0%,58%{transform:translateX(-125%)}86%,100%{transform:translateX(125%)}}
+.rim{position:absolute;inset:-1px;border-radius:37px;pointer-events:none;padding:1.7px;
+ background:linear-gradient(140deg,rgba(255,180,80,.9),transparent 32%,transparent 62%,rgba(79,195,217,.9));
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+
+/* объёмная буква */
+.slab{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) translateZ(86px);
+ transform-style:preserve-3d;font-family:"Ubuntu",sans-serif;font-weight:700;font-size:190px;line-height:.8;
+ opacity:0;animation:unfoldN .9s cubic-bezier(.16,.9,.3,1) .55s forwards}
+@keyframes unfoldN{from{opacity:0;transform:translate(-50%,-50%) translateZ(20px) scale(.8)}
+                   to{opacity:1;transform:translate(-50%,-50%) translateZ(86px) scale(1)}}
+.slab i{position:absolute;inset:0;font-style:normal}
+.slab .face{position:relative;background:linear-gradient(150deg,#8FE6F0,#2E8C99 40%,#0C363D);
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+.slab .gloss{position:absolute;inset:0;background:linear-gradient(158deg,rgba(255,255,255,.95),transparent 44%);
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+
+.orb{position:absolute;border-radius:50%}
+.o1{width:16px;height:16px;background:var(--amber);box-shadow:0 0 30px rgba(240,160,46,.95);top:12%;right:8%;transform:translateZ(150px);animation:fl 6s ease-in-out infinite}
+.o2{width:10px;height:10px;background:var(--cyan);box-shadow:0 0 22px rgba(79,195,217,.9);bottom:16%;left:6%;transform:translateZ(120px);animation:fl 7.4s ease-in-out infinite .6s}
+.o3{width:7px;height:7px;background:#8FE0C8;box-shadow:0 0 16px rgba(143,224,200,.9);top:58%;right:2%;transform:translateZ(170px);animation:fl 5.6s ease-in-out infinite .3s}
+@keyframes fl{0%,100%{margin-top:0}50%{margin-top:-18px}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+@media(max-width:900px){
+ .hero{grid-template-columns:1fr;min-height:auto;padding:40px 0}
+ .stage{order:-1;min-height:340px} .rig{width:min(74%,290px)}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}
+ .layer,.slab{opacity:1!important}}
+</style></head><body>
+<div class="bg"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div class="grain"></div>
+
+<div class="wrap"><section class="hero">
+  <div>
+    <div class="tag">◆ Advanced technology investors</div>
+    <h1>Built quietly.<br><em>Valued loudly.</em></h1>
+    <p class="sub">We invest in advanced technology and the companies that will define what comes next.</p>
+    <a class="btn" href="#">Get in touch <i>→</i></a>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="rig" id="rig">
+      <!-- 4 уровня, каждый со своим содержимым -->
+      <div class="layer L1"><div class="dots"></div></div>
+      <div class="layer L2">
+        <svg class="net" viewBox="0 0 380 380">
+          <line x1="70" y1="300" x2="150" y2="200"/><line x1="150" y1="200" x2="250" y2="240"/>
+          <line x1="250" y1="240" x2="310" y2="130"/><line x1="150" y1="200" x2="120" y2="90"/>
+          <circle cx="70" cy="300" r="5"/><circle cx="150" cy="200" r="6"/>
+          <circle cx="250" cy="240" r="5"/><circle cx="310" cy="130" r="4"/><circle cx="120" cy="90" r="4"/>
+        </svg>
+      </div>
+      <div class="layer L3">
+        <span class="chip" style="top:14%;left:16%">Nuclear</span>
+        <span class="chip" style="bottom:18%;right:16%">Quantum</span>
+        <span class="chip" style="top:50%;left:12%">Space</span>
+      </div>
+      <div class="layer L4"><span class="rim"></span><div class="sheen"></div></div>
+
+      <div class="slab" id="slab"><span class="face">N</span><span class="gloss">N</span></div>
+      <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+    </div>
+  </div>
+</section></div>
+
+<script>
+const slab=document.getElementById('slab'),D=40;
+for(let i=D;i>0;i--){const l=document.createElement('i');l.textContent='N';const k=i/D;
+ l.style.transform=`translateZ(${-i*1.7}px)`;
+ l.style.color=`rgb(${Math.round(10+30*(1-k))},${Math.round(42+52*(1-k))},${Math.round(48+56*(1-k))})`;
+ slab.insertBefore(l,slab.firstChild);}
+const st=document.getElementById('stage'),rig=document.getElementById('rig');
+if(!matchMedia('(hover:none)').matches){
+ st.addEventListener('pointermove',e=>{const r=st.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  rig.style.animation='none';
+  rig.style.setProperty('--ry',(-30+x*40).toFixed(1)+'deg');
+  rig.style.setProperty('--rx',(14-y*30).toFixed(1)+'deg');
+  rig.style.transform=`rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(-4deg)`;});
+ st.addEventListener('pointerleave',()=>{rig.style.animation='';rig.style.transform='';});}
+</script></body></html>

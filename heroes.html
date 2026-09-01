@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Noventra — варианты героя</title>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FBF8F3;--teal:#1E4E56;--teal-2:#2A656F;--amber:#E39A34;--ink:#14201F;--muted:#6C7A78;--line:rgba(20,32,31,.10)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);font-family:"Open Sans",sans-serif;color:var(--ink)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+ background:radial-gradient(56% 42% at 84% 6%,rgba(227,154,52,.16),transparent 62%),
+            radial-gradient(50% 38% at 4% 44%,rgba(42,101,111,.10),transparent 64%)}
+.lab{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);padding:44px 0 4px}
+.name{font-family:"Ubuntu",sans-serif;font-size:22px;font-weight:700;margin-bottom:6px}
+.note{color:var(--muted);font-size:14px;max-width:62ch;margin-bottom:20px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.stage{display:grid;place-items:center;min-height:440px;perspective:1400px;border:1px dashed var(--line);border-radius:26px;background:rgba(255,255,255,.4)}
+.hr{height:1px;background:var(--line);margin:52px 0 0}
+
+/* ══ ОБЩЕЕ: объёмная буква ══ */
+.slab{position:relative;transform-style:preserve-3d;font-family:"Ubuntu",sans-serif;font-weight:700;
+  font-size:230px;line-height:.8;letter-spacing:-.04em}
+.slab i{position:absolute;inset:0;display:block;font-style:normal;color:#0E3439}
+.slab .face{position:relative;background:linear-gradient(150deg,#7FD3DC,#2A656F 42%,#0F343A);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.gloss{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.92),rgba(255,255,255,0) 46%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none}
+
+/* ── A: экструдированная плита ── */
+#a .rig{transform-style:preserve-3d;animation:spinA 14s ease-in-out infinite}
+@keyframes spinA{0%,100%{transform:rotateX(12deg) rotateY(-22deg)}50%{transform:rotateX(6deg) rotateY(10deg)}}
+#a .plate{position:absolute;width:340px;height:340px;left:50%;top:50%;margin:-170px 0 0 -170px;border-radius:40px;
+  transform:translateZ(-70px);background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(190,220,222,.45));
+  border:1px solid rgba(255,255,255,.9);box-shadow:0 40px 80px -34px rgba(14,52,57,.5)}
+
+/* ── B: буква в стеклянном блоке ── */
+#b .block{position:relative;width:330px;height:330px;border-radius:44px;transform-style:preserve-3d;
+  animation:spinB 16s ease-in-out infinite;display:grid;place-items:center;
+  background:linear-gradient(155deg,rgba(255,255,255,.82),rgba(198,228,230,.4) 52%,rgba(150,196,201,.34));
+  border:1px solid rgba(255,255,255,.92);
+  box-shadow:0 46px 90px -36px rgba(14,52,57,.52), inset 0 2px 0 rgba(255,255,255,.95), inset 0 -18px 34px rgba(30,78,86,.14)}
+@keyframes spinB{0%,100%{transform:rotateX(14deg) rotateY(-20deg)}50%{transform:rotateX(6deg) rotateY(16deg)}}
+#b .block::after{content:"";position:absolute;inset:0;border-radius:44px;pointer-events:none;
+  background:linear-gradient(118deg,transparent 32%,rgba(255,255,255,.78) 45%,transparent 57%);
+  animation:sweep 7s ease-in-out infinite}
+#b .edge{position:absolute;inset:-1px;border-radius:45px;pointer-events:none;padding:1.6px;
+  background:linear-gradient(140deg,rgba(255,190,100,.75),transparent 34%,transparent 64%,rgba(90,205,220,.75));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+#b .slab{font-size:180px;transform:translateZ(46px)}
+
+/* ── C: разложенные пластины + буква над ними ── */
+#c .rig{position:relative;width:360px;height:360px;transform-style:preserve-3d;animation:spinC 15s ease-in-out infinite}
+@keyframes spinC{0%,100%{transform:rotateX(16deg) rotateY(-24deg)}50%{transform:rotateX(8deg) rotateY(8deg)}}
+#c .card{position:absolute;inset:0;border-radius:38px;border:1px solid rgba(255,255,255,.9);
+  background:linear-gradient(150deg,rgba(255,255,255,.86),rgba(196,226,228,.38));
+  box-shadow:0 30px 64px -30px rgba(14,52,57,.42)}
+#c .c1{transform:translateZ(-120px) rotate(-16deg) scale(.9);opacity:.4}
+#c .c2{transform:translateZ(-64px) rotate(-8deg) scale(.95);opacity:.65}
+#c .c3{transform:translateZ(-14px)}
+#c .slab{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) translateZ(78px);font-size:186px}
+.sweep{position:absolute;inset:0;border-radius:38px;pointer-events:none;overflow:hidden}
+.sweep::after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,transparent 34%,rgba(255,255,255,.8) 46%,transparent 58%);animation:sweep 6.5s ease-in-out infinite}
+@keyframes sweep{0%,60%{transform:translateX(-125%)}86%,100%{transform:translateX(125%)}}
+
+.orb{position:absolute;border-radius:50%}
+.o1{width:16px;height:16px;background:var(--amber);box-shadow:0 0 26px rgba(227,154,52,.9);top:16%;right:12%;transform:translateZ(120px);animation:fl 6s ease-in-out infinite}
+.o2{width:10px;height:10px;background:#5EC6D6;box-shadow:0 0 20px rgba(94,198,214,.85);bottom:20%;left:10%;transform:translateZ(96px);animation:fl 7.5s ease-in-out infinite .7s}
+@keyframes fl{0%,100%{margin-top:0}50%{margin-top:-16px}}
+.halo{position:absolute;width:420px;height:420px;border-radius:50%;z-index:-1;filter:blur(40px);
+  background:radial-gradient(circle,rgba(227,154,52,.3),rgba(94,198,214,.16) 46%,transparent 70%);animation:pu 8s ease-in-out infinite}
+@keyframes pu{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.1);opacity:1}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body><div class="wrap">
+
+<div class="lab">Вариант A</div>
+<div class="name">Экструдированная плита</div>
+<p class="note">Буква — цельный кусок стекла с реальной толщиной. Ближе всего к референсу: видно боковые грани и фаску. Вращается медленно, показывая объём.</p>
+<div class="stage" id="a">
+  <div class="halo"></div>
+  <div class="rig" style="position:relative">
+    <div class="plate"></div>
+    <div class="slab" id="slabA"><span class="face">N</span><span class="gloss">N</span></div>
+    <span class="orb o1"></span><span class="orb o2"></span>
+  </div>
+</div>
+
+<div class="hr"></div>
+<div class="lab">Вариант B</div>
+<div class="name">Буква внутри стеклянного блока</div>
+<p class="note">Как награда или пресс-папье: массивный блок с фаской, буква утоплена внутрь. Кромка играет янтарным и бирюзовым, по стеклу пробегает блик.</p>
+<div class="stage" id="b">
+  <div class="halo"></div>
+  <div class="block">
+    <span class="edge"></span>
+    <div class="slab" id="slabB"><span class="face">N</span><span class="gloss">N</span></div>
+    <span class="orb o1"></span><span class="orb o2"></span>
+  </div>
+</div>
+
+<div class="hr"></div>
+<div class="lab">Вариант C</div>
+<div class="name">Пластины + буква над ними</div>
+<p class="note">Развитие текущего: стопка стеклянных карт, но буква вынесена вперёд и стала объёмной — висит над стеклом, а не лежит на нём.</p>
+<div class="stage" id="c">
+  <div class="halo"></div>
+  <div class="rig">
+    <div class="card c1"></div><div class="card c2"></div>
+    <div class="card c3"><div class="sweep"></div></div>
+    <div class="slab" id="slabC"><span class="face">N</span><span class="gloss">N</span></div>
+    <span class="orb o1"></span><span class="orb o2"></span>
+  </div>
+</div>
+<div style="height:70px"></div>
+</div>
+<script>
+// объём: клонируем букву в глубину — каждый слой темнее
+document.querySelectorAll('.slab').forEach(slab=>{
+  const D = slab.id==='slabA' ? 46 : 30;
+  for(let i=D;i>0;i--){
+    const l=document.createElement('i');
+    l.textContent='N';
+    const k=i/D;
+    l.style.transform=`translateZ(${-i*1.6}px)`;
+    l.style.color=`rgb(${Math.round(12+26*(1-k))},${Math.round(46+42*(1-k))},${Math.round(52+46*(1-k))})`;
+    slab.insertBefore(l, slab.firstChild);
+  }
+});
+// параллакс
+document.querySelectorAll('.stage').forEach(st=>{
+  const rig = st.querySelector('.rig, .block');
+  if(!rig || matchMedia('(hover:none)').matches) return;
+  st.addEventListener('pointermove',e=>{
+    const r=st.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    rig.style.animation='none';
+    rig.style.transform=`rotateX(${(10-y*26).toFixed(1)}deg) rotateY(${(-14+x*34).toFixed(1)}deg)`;
+  });
+  st.addEventListener('pointerleave',()=>{rig.style.animation='';rig.style.transform='';});
+});
+</script></body></html>
