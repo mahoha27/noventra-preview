@@ -1,18 +1,44 @@
 <!DOCTYPE html><html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Noventra — три варианта</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Noventra — все версии</title>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
-<style>body{background:#FBF8F3;font-family:"Open Sans",sans-serif;color:#14201F;margin:0;padding:60px 24px}
-.w{max-width:760px;margin:0 auto}h1{font-family:"Ubuntu",sans-serif;font-size:30px;margin-bottom:8px}
-p{color:#6C7A78;margin-bottom:30px}
+<style>body{background:#FBF8F3;font-family:"Open Sans",sans-serif;color:#14201F;margin:0;padding:48px 20px 70px}
+.w{max-width:720px;margin:0 auto}
+h1{font-family:"Ubuntu",sans-serif;font-size:clamp(24px,6vw,30px);margin:0 0 8px;letter-spacing:-.02em}
+.sub{color:#6C7A78;margin:0 0 32px;font-size:15px;line-height:1.6}
+.eyebrow{font-family:"Ubuntu",sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+ color:#E39A34;margin:34px 0 14px}
 a.card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid rgba(20,32,31,.1);
- border-radius:18px;padding:22px 24px;margin-bottom:14px;box-shadow:0 14px 34px -22px rgba(20,50,52,.3)}
+ border-radius:18px;padding:20px 22px;margin-bottom:12px;box-shadow:0 14px 34px -22px rgba(20,50,52,.3);transition:.2s}
 a.card:hover{transform:translateY(-2px)}
-h2{font-family:"Ubuntu",sans-serif;font-size:20px;margin:0 0 6px}
-span{color:#6C7A78;font-size:14.5px}
+a.card.old{background:transparent;box-shadow:none;padding:15px 18px}
+h2{font-family:"Ubuntu",sans-serif;font-size:19px;margin:0 0 5px;letter-spacing:-.01em}
+a.card.old h2{font-size:16px;font-weight:500}
+span{color:#6C7A78;font-size:14.5px;line-height:1.55;display:block}
+.tag{display:inline-block;background:rgba(30,78,86,.09);color:#1E4E56;font-size:11px;
+ padding:3px 9px;border-radius:999px;margin-left:8px;vertical-align:2px}
 </style></head><body><div class="w">
-<h1>Noventra — три варианта первого экрана</h1>
-<p>Общие правки во всех трёх: логотип с подписью Venture, второй экран разбит на читаемые блоки, секторы выровнены, про команду — от первого лица.</p>
-<a class="card" href="v1.html"><h2>1 · Сцена в фоне</h2><span>Спокойно вращается по кругу, курсор не трогает. Без рамок и вырезов — растворяется в фоне справа.</span></a>
-<a class="card" href="v2.html"><h2>2 · Только текст</h2><span>Первый экран без картинок. Заголовок по центру, ничего лишнего.</span></a>
-<a class="card" href="v3.html"><h2>3 · Полу-объём без 3D</h2><span>Мягкая форма из слоёв на CSS. Медленно поворачивается, не грузит и не глючит.</span></a>
+<h1>Noventra — все версии</h1>
+<p class="sub">Общее во всех трёх актуальных: логотип с подписью Venture, второй экран разбит на читаемые блоки,
+секторы выровнены, про команду — от первого лица. На телефоне секторы листаются свайпом.</p>
+
+<div class="eyebrow">Текущие варианты</div>
+<a class="card" href="v3.html"><h2>3 · Полу-объём без 3D<span class="tag">выбран</span></h2>
+<span>Мягкая форма из слоёв на CSS. Медленно поворачивается, ничего не грузит и не глючит.</span></a>
+<a class="card" href="v1.html"><h2>1 · Сцена в фоне</h2>
+<span>Готовый 3D-объект, спокойно вращается по кругу. Курсор его не трогает, рамок и вырезов нет.</span></a>
+<a class="card" href="v2.html"><h2>2 · Только текст</h2>
+<span>Первый экран без картинок. Заголовок по центру, ничего лишнего.</span></a>
+
+<div class="eyebrow">Ранние — как дошли до этого</div>
+<a class="card old" href="index.html"><h2>Первая версия — бетон и типографика</h2>
+<span>С чего начинали: строгая сетка, крупный шрифт, без иллюстраций.</span></a>
+<a class="card old" href="index-v2.html"><h2>В стиле Dolphin Pay</h2>
+<span>По референсу с Behance, который ты присылал.</span></a>
+<a class="card old" href="heroes.html"><h2>Подборка первых экранов</h2>
+<span>Четыре варианта героя на одной странице для сравнения.</span></a>
+<a class="card old" href="hero-v4.html"><h2>Герой v4</h2><span>Отдельный заход на первый экран.</span></a>
+<a class="card old" href="depth.html"><h2>Заход на объём</h2>
+<span>Попытка сделать глубину слоями — та самая, где вышел «просто цветной фон».</span></a>
+<a class="card old" href="index-spline.html"><h2>Первый заход со Spline</h2>
+<span>Когда сцена ещё тащила свой тёмный фон и её приходилось маскировать.</span></a>
 </div></body></html>
