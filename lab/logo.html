@@ -396,17 +396,20 @@ function play(root,{hold=700, dur=1200, step=27, spin=true}={}){
   if(glyph) glyph.animate(
     [{opacity:0,transform:'scale(.95)',easing:'ease-out'},
      {opacity:1,transform:'scale(1)',offset:.20,easing:'linear'},
-     {opacity:1,transform:'scale(1)',offset:.72,easing:'ease-in'},
+     {opacity:1,transform:'scale(1)',offset:.78,easing:'ease-in'},
      {opacity:0,transform:'scale(1.07)'}],
-    {duration:hold+440,easing:'linear',fill:'both'});
+    {duration:hold+430,easing:'linear',fill:'both'});
 
   wraps.forEach((w,i)=>{
     const p=w.querySelector('.p');
     w.animate(
       [{transform:w.dataset.start,offset:0},{transform:w.dataset.end,offset:1}],
       {duration:dur,delay:hold+i*step,easing:EASE,fill:'both'});
-    if(p) p.animate([{opacity:0},{opacity:0,offset:.12},{opacity:p.getAttribute('opacity')}],
-      {duration:dur*.7,delay:hold+i*step,easing:'ease-out',fill:'backwards'});
+    if(p) p.animate(
+      [{opacity:0,offset:0},{opacity:0,offset:.17},
+       {opacity:p.getAttribute('opacity'),offset:.42},
+       {opacity:p.getAttribute('opacity'),offset:1}],
+      {duration:dur,delay:hold+i*step,easing:'linear',fill:'backwards'});
   });
 
   const total=hold+(wraps.length-1)*step+dur;
