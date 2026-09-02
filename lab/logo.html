@@ -24,7 +24,7 @@ p{color:#3E4B49}p+p{margin-top:12px}
 
 /* ── сам знак ─────────────────────────────────────────────── */
 .logo{width:100%;height:100%;display:block;overflow:visible}
-.logo .pw,.logo .q,.logo .spin{transform-box:view-box;transform-origin:100px 100px}
+.logo .pw,.logo .q,.logo .spin,.logo .glyph{transform-box:view-box;transform-origin:100px 100px}
 /* лепесток растёт от основания, а не от своей середины */
 .logo .p{transform-box:view-box;transform-origin:100px 134px;
  transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
@@ -402,11 +402,12 @@ function play(root,{hold=1060, dur=1250, step=20, spin=true}={}){
   // ровно в ту, из которой потом раскрывается веер. Прозрачность уходит только
   // в самом конце сжатия, когда от буквы уже осталась вертикальная черта.
   if(glyph) glyph.animate(
-    [{opacity:0, transform:'scaleX(1) scaleY(.96)', easing:'ease-out'},
-     {opacity:1, transform:'scaleX(1) scaleY(1)',    offset:.16, easing:'linear'},
-     {opacity:1, transform:'scaleX(1) scaleY(1)',    offset:.55, easing:'cubic-bezier(.55,.02,.3,1)'},
-     {opacity:1, transform:'scaleX(.055) scaleY(1.04)', offset:.92, easing:'linear'},
-     {opacity:0, transform:'scaleX(.055) scaleY(1.04)', offset:1}],
+    [{opacity:0, transform:'scaleX(1) scaleY(.96)', fill:'#1E4E56', easing:'ease-out'},
+     {opacity:1, transform:'scaleX(1) scaleY(1)',    fill:'#1E4E56', offset:.16, easing:'linear'},
+     {opacity:1, transform:'scaleX(1) scaleY(1)',    fill:'#1E4E56', offset:.55,
+      easing:'cubic-bezier(.55,.02,.3,1)'},
+     {opacity:1, transform:'scaleX(.055) scaleY(1.04)', fill:'#8FD3DC', offset:.92, easing:'linear'},
+     {opacity:0, transform:'scaleX(.055) scaleY(1.04)', fill:'#B7E4EA', offset:1}],
     {duration:hold+90,easing:'linear',fill:'both'});
 
   wraps.forEach((w,i)=>{
